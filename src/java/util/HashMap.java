@@ -40,19 +40,29 @@ import sun.misc.SharedSecrets;
  * Hash table based implementation of the <tt>Map</tt> interface.  This
  * implementation provides all of the optional map operations, and permits
  * <tt>null</tt> values and the <tt>null</tt> key.  (The <tt>HashMap</tt>
- * class is roughly equivalent to <tt>Hashtable</tt>, except that it is
+ * class is roughly equivalent（大约相当于） to <tt>Hashtable</tt>, except that it is
  * unsynchronized and permits nulls.)  This class makes no guarantees as to
  * the order of the map; in particular, it does not guarantee that the order
  * will remain constant over time.
  *
+ * Hash表是基于Map接口的实现，这个实现提供了Map所有的可选操作，和允许null值作为values
+ * 和null值作为key。（HashMap类是大约相当于HashTable，只是HashMap不是线程同步的，
+ * 还有HashMap允许null值）
+ * 这个类是不保证map的顺序有效性的，特别地，它也不保证顺序随着时间的推移不会改变。
+ *
  * <p>This implementation provides constant-time performance for the basic
  * operations (<tt>get</tt> and <tt>put</tt>), assuming the hash function
- * disperses the elements properly among the buckets.  Iteration over
- * collection views requires time proportional to the "capacity" of the
+ * disperses（分散） the elements properly among the buckets.  Iteration over
+ * collection views requires time proportional（成正比） to the "capacity" of the
  * <tt>HashMap</tt> instance (the number of buckets) plus its size (the number
  * of key-value mappings).  Thus, it's very important not to set the initial
  * capacity too high (or the load factor too low) if iteration performance is
  * important.
+ *
+ * 这个实现提供了固定时间性能的基本操作（get和put），假设使用hash函数在桶内把元素分散，
+ * 迭代集合视图所需要的时间与“容器”中HashMap实例（Bucket的数量）加上它的大小（Key-value
+ * 键值对的数量）成正比。所以，不设置初始容量太高（或者负载元素太低）
+ * 对于它迭代的性能是非常重要的。
  *
  * <p>An instance of <tt>HashMap</tt> has two parameters that affect its
  * performance: <i>initial capacity</i> and <i>load factor</i>.  The
@@ -64,6 +74,11 @@ import sun.misc.SharedSecrets;
  * current capacity, the hash table is <i>rehashed</i> (that is, internal data
  * structures are rebuilt) so that the hash table has approximately twice the
  * number of buckets.
+ *
+ * 一个HashMap有两个参数会影响它的性能：初始容量和负载因子，容量是指在哈希表中桶的数量，
+ * 初始容量是指在创建哈希表时的初始容量。负载因子是一个度量，在它的容量自动增加之前，
+ * 哈希表被允许达到的程度。 当哈希表中的条目数超过负载因子和当前容量的乘积时，哈希表会
+ * 重构Hash(rehash)（也就是说，内部的数据结构重建）会以哈希表的数量大概是桶数量的两倍。
  *
  * <p>As a general rule, the default load factor (.75) offers a good
  * tradeoff between time and space costs.  Higher values decrease the
@@ -232,6 +247,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * The default initial capacity - MUST be a power of two.
+     * 初始化大小为16（必为为2的N次幂）
      */
     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
 
@@ -239,11 +255,13 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      * The maximum capacity, used if a higher value is implicitly specified
      * by either of the constructors with arguments.
      * MUST be a power of two <= 1<<30.
+     * 最大的容量
      */
     static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
      * The load factor used when none specified in constructor.
+     * 负载因子为0.75，即超过0.75后，就会扩大容量，扩大的容量为原来的两倍大小
      */
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
